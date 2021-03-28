@@ -5,6 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'redTreeOnWall/VimColor'		"我的主题
 	Plug 'blueshirts/darcula'		" idea 主题
+	Plug 'junegunn/seoul256.vim'
 "	Plug 'vim-scripts/AutoComplPop'  	" 自动补全 自动联想
 "	Plug 'kien/ctrlp.vim' 			"按ctr-p快速跳转到文件
 	"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -60,6 +61,9 @@ set linespace=3
 
 " 主题
 color darcula 
+
+let g:seoul256_background = 256
+colo seoul256
 
 "终端鼠标复制粘贴
 if has('mouse')
