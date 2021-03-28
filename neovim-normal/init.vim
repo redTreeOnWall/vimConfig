@@ -2,7 +2,7 @@
 "https://github.com/junegunn/vim-plug#usage
 call plug#begin('~/.local/share/nvim/plugged')
 
-	"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'redTreeOnWall/VimColor'		"我的主题
 	Plug 'blueshirts/darcula'		" idea 主题
 "	Plug 'vim-scripts/AutoComplPop'  	" 自动补全 自动联想
@@ -10,6 +10,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 	"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 call plug#end()
+
+" pligin setting
+map <F2> :NERDTreeToggle<CR>
 
 
 set noundofile
@@ -29,7 +32,7 @@ set encoding=utf-8
 set langmenu=zh_CN
 let $LANG = 'en_US.UTF-8'
 
-"高亮当前行
+"高亮当前
 set cursorline
 "设置终端的当前行的颜色
 "highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=black guifg=green
@@ -45,17 +48,18 @@ set splitright
 set nolist
 set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
 "set guifont=Inconsolata:h11:cANSI
-""""set guifont=Source\ Code\ Variable:h11:cANSI
+"set guifont=Source\ Code\ Variable:h11:cANSI
 "set guifont=Consolas:h11:cANSI
 "set guifont=Source\ Code\ Variable\ SemiBold:h10:cANSI
-"set linespace=0
+set guifont=Source\ Code\ Pro:h12:cANSI
+set linespace=3
 
 "默认最大化窗口打开
 "au GUIEnter * simalt ~x 
 
 
 " 主题
-color jellybeans
+color darcula 
 
 "终端鼠标复制粘贴
 if has('mouse')
