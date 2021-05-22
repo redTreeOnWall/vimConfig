@@ -17,9 +17,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
   
   
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'MaxMEllon/vim-jsx-pretty'
-  Plug 'leafgarland/typescript-vim'
+  "Plug 'peitalin/vim-jsx-typescript'
+  "Plug 'MaxMEllon/vim-jsx-pretty'
+  "Plug 'leafgarland/typescript-vim'
 
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
