@@ -11,6 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'redTreeOnWall/VimColor'		"我的主题
 	Plug 'blueshirts/darcula'		" idea 主题
+  Plug 'yuttie/inkstained-vim' " 亮色
 	Plug 'junegunn/seoul256.vim'
 " 	Plug 'vim-scripts/AutoComplPop'  	" 自动补全 自动联想
 "	Plug 'kien/ctrlp.vim' 			"按ctr-p快速跳转到文件
@@ -29,6 +30,10 @@ call plug#end()
 map <F2> :NERDTreeToggle<CR>
 
 " ------- coc start ---------
+
+let g:coc_snippet_next = '<C-Q>'
+let g:coc_snippet_prev = '<C-E>'
+
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
