@@ -11,18 +11,17 @@ call plug#begin('~/.local/share/nvim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'redTreeOnWall/VimColor'		"我的主题
 	Plug 'blueshirts/darcula'		" idea 主题
-  Plug 'yuttie/inkstained-vim' " 亮色
-	Plug 'junegunn/seoul256.vim'
-" 	Plug 'vim-scripts/AutoComplPop'  	" 自动补全 自动联想
-"	Plug 'kien/ctrlp.vim' 			"按ctr-p快速跳转到文件
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  
-  
-  "Plug 'peitalin/vim-jsx-typescript'
-  "Plug 'MaxMEllon/vim-jsx-pretty'
-  "Plug 'leafgarland/typescript-vim'
 
-  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+
+  Plug 'tpope/vim-fugitive'
+  Plug 'nvim-treesitter/nvim-treesitter' 
+  
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
 
 call plug#end()
 
@@ -30,7 +29,6 @@ call plug#end()
 map <F2> :NERDTreeToggle<CR>
 
 " ------- coc start ---------
-
 let g:coc_snippet_next = '<C-Q>'
 let g:coc_snippet_prev = '<C-E>'
 
@@ -201,12 +199,54 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " ------------ coc end --------------
 
-" ---------- clap start --------------
-let g:clap_layout = { 'relative': 'editor' }
-nmap <C-p> :Clap history<CR>
-" ---------- clap end --------------
+" ------------ telescope start ----------
+" Find files using Telescope command-line sugar.
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <c-p> <cmd>Telescope oldfiles<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" ------------ telescope end ----------
 
+" ------------ treesite start ----------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  -- , {'do': ':TSUpdate'}
+  ensure_installed = {
+    "vim",
+    "lua",
+    "javascript",
+    "typescript",
+    "tsx",
+    "cpp",
+    "java",
+    "cmake",
+    "c_sharp",
+    "glsl",
+    "json",
+    "json5",
+    "python",
+    "scala",
+    "vue",
+    "html",
+    "css",
+  },
 
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+" ------------ treesite end ----------
 
 set tabstop=2
 set shiftwidth=2
@@ -221,39 +261,21 @@ set autochdir
 set whichwrap=b,s,<,>,[,]
 set nobomb
 set backspace=indent,eol,start whichwrap+=<,>,[,]
-" Vim 的默认寄存器和系统剪贴板共享
-set clipboard+=unnamed
+
+" set clipboard+=unnamed
 
 set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
 set encoding=utf-8
-set langmenu=zh_CN
 let $LANG = 'en_US.UTF-8'
 
-" syntax off
-"高亮当前
 set cursorline
-"设置终端的当前行的颜色
-"highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=black guifg=green
-"highlight CursorLine   cterm=NONE guibg=#424242
 set hlsearch
 set number
-" 窗口大小
-"set lines=15 columns=80
-" 分割出来的窗口位于当前窗口下边/右边
 set splitbelow
 set splitright
 
 set nolist
 set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
-"set guifont=Inconsolata:h11:cANSI
-"set guifont=Source\ Code\ Variable:h11:cANSI
-"set guifont=Consolas:h11:cANSI
-"set guifont=Source\ Code\ Variable\ SemiBold:h10:cANSI
-set guifont=Source\ Code\ Pro:h12:cANSI
-set linespace=3
-
-"默认最大化窗口打开
-"au GUIEnter * simalt ~x 
 
 imap <C-j> <down>
 imap <C-k> <up>
@@ -271,42 +293,7 @@ inoremap jk <ESC>
 " 主题
 color darcula 
 
-" let g:seoul256_background = 256
-" colo seoul256
-
 "终端鼠标复制粘贴
 if has('mouse')
 	set mouse-=a
 endif
-
-" set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
-
-
