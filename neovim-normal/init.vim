@@ -22,7 +22,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
+  Plug 'ferrine/md-img-paste.vim'
 
+  Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 " plugin setting
@@ -197,7 +200,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" ------------ coc end --------------
 
 " ------------ telescope start ----------
 " Find files using Telescope command-line sugar.
@@ -207,7 +209,6 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" ------------ telescope end ----------
 
 " ------------ treesite start ----------
 lua <<EOF
@@ -246,7 +247,13 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-" ------------ treesite end ----------
+
+" ------------ md-img-paste.vim ----------
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+
 
 set tabstop=2
 set shiftwidth=2
