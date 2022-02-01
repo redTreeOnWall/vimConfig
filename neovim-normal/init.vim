@@ -1,4 +1,3 @@
-
 imap <C-j> <down>
 imap <C-k> <up>
 imap <C-h> <left>
@@ -8,19 +7,25 @@ imap <C-l> <right>
 "https://github.com/junegunn/vim-plug#usage
 call plug#begin('~/.local/share/nvim/plugged')
 
-	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-	Plug 'redTreeOnWall/VimColor'		"我的主题
-	Plug 'blueshirts/darcula'		" idea 主题
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'redTreeOnWall/VimColor'		"我的主题
+  Plug 'blueshirts/darcula'		" idea 主题
+
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'}
+  Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'}
+  Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'}
+  Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'}
+  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'}
+  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'}
 
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 
   Plug 'tpope/vim-fugitive'
   Plug 'nvim-treesitter/nvim-treesitter' 
-  
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+
+  " Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline-themes'
 
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
   Plug 'ferrine/md-img-paste.vim'
@@ -30,6 +35,9 @@ call plug#end()
 
 " plugin setting
 map <F2> :NERDTreeToggle<CR>
+
+" md-img-paste
+" TODO 
 
 " ------- coc start ---------
 let g:coc_snippet_next = '<C-Q>'
