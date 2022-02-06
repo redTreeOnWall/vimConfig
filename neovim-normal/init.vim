@@ -260,6 +260,7 @@ require'nvim-treesitter.configs'.setup {
     "vue",
     "html",
     "css",
+    "markdown",
   },
 
   highlight = {
