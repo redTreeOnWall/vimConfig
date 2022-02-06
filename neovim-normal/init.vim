@@ -7,30 +7,45 @@ imap <C-l> <right>
 "https://github.com/junegunn/vim-plug#usage
 call plug#begin('~/.local/share/nvim/plugged')
 
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'redTreeOnWall/VimColor'		"我的主题
-  Plug 'blueshirts/darcula'		" idea 主题
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " 文件树
 
-  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'}
-  Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'}
-  Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'}
-  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'}
-  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'}
+  Plug 'redTreeOnWall/VimColor'		" 我自己的颜色主题
+
+  Plug 'blueshirts/darcula'		" darcula 主题
+
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'} " LSP 
+
+  Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'} " typescript 支持
+
+  Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html 支持
+
+  Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint 支持
+
+  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier 支持
+
+  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'} " 拼写检查
+
 
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
 
-  Plug 'tpope/vim-fugitive'
-  Plug 'nvim-treesitter/nvim-treesitter' 
+  Plug 'nvim-telescope/telescope.nvim' " 快速跳转文件,历史记录等
+
+
+  Plug 'tpope/vim-fugitive' " git 工具
+
+  Plug 'nvim-treesitter/nvim-treesitter' " 语法高亮
+
 
   " Plug 'vim-airline/vim-airline'
+  "
   " Plug 'vim-airline/vim-airline-themes'
 
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
-  Plug 'ferrine/md-img-paste.vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  } " markdown 增强和实时预览
 
-  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'ferrine/md-img-paste.vim'  " 快速在 markdown 文件中粘贴图片
+
+
+  Plug 'dhruvasagar/vim-table-mode' " markdown 中自动对齐表格
 call plug#end()
 
 " plugin setting
