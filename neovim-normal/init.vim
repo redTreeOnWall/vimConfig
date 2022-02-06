@@ -6,16 +6,19 @@ imap <C-l> <right>
 "plug
 "https://github.com/junegunn/vim-plug#usage
 call plug#begin('~/.local/share/nvim/plugged')
-
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " 文件树
 
   Plug 'redTreeOnWall/VimColor'		" 我自己的颜色主题
 
   Plug 'blueshirts/darcula'		" darcula 主题
 
-  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'} " LSP 
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'} " LSP 支持
 
   Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'} " typescript 支持
+
+  Plug 'neoclide/coc-java', {'do': 'npm install --frozen-lockfile'} " java 支持
+
+  Plug 'clangd/coc-clangd', {'do': 'npm install --frozen-lockfile'} " c/c++ 支持
 
   Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html 支持
 
@@ -46,6 +49,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 
   Plug 'dhruvasagar/vim-table-mode' " markdown 中自动对齐表格
+
 call plug#end()
 
 " plugin setting
