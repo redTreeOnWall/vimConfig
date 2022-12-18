@@ -6,37 +6,30 @@ imap <C-l> <right>
 "plug
 "https://github.com/junegunn/vim-plug#usage
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " 文件树
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-  Plug 'redTreeOnWall/VimColor'		" 我自己的颜色主题
+  Plug 'redTreeOnWall/VimColor'
 
-  Plug 'blueshirts/darcula'		" darcula 主题
+  Plug 'blueshirts/darcula'
 
-  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'} " LSP 支持
-
-  Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'} " typescript 支持
-
-  Plug 'neoclide/coc-java', {'do': 'npm install --frozen-lockfile'} " java 支持
-
-  Plug 'clangd/coc-clangd', {'do': 'npm install --frozen-lockfile'} " c/c++ 支持
-
-  Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html 支持
-
-  Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint 支持
-
-  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier 支持
-
-  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'} " 拼写检查
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install --frozen-lockfile'} " LSP
+  Plug 'neoclide/coc-tsserver', {'do': 'npm install --frozen-lockfile'} " typescript
+  Plug 'neoclide/coc-java', {'do': 'npm install --frozen-lockfile'} " java
+  Plug 'clangd/coc-clangd', {'do': 'npm install --frozen-lockfile'} " c/c++
+  Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html
+  Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint
+  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
+  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'}  " spell check
 
 
   Plug 'nvim-lua/plenary.nvim'
 
-  Plug 'nvim-telescope/telescope.nvim' " 快速跳转文件,历史记录等
+  Plug 'nvim-telescope/telescope.nvim'
 
 
-  Plug 'tpope/vim-fugitive' " git 工具
+  Plug 'tpope/vim-fugitive' " git
 
-  Plug 'nvim-treesitter/nvim-treesitter' " 语法高亮
+  Plug 'nvim-treesitter/nvim-treesitter'
 
 
   " Plug 'vim-airline/vim-airline'
@@ -45,10 +38,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  } " markdown 增强和实时预览
 
-  Plug 'ferrine/md-img-paste.vim'  " 快速在 markdown 文件中粘贴图片
+  Plug 'ferrine/md-img-paste.vim'  " paste image in markdown 
 
+  Plug 'dhruvasagar/vim-table-mode' " align table in markdown 
 
-  Plug 'dhruvasagar/vim-table-mode' " markdown 中自动对齐表格
+  Plug 'easymotion/vim-easymotion'
+
+  Plug 'sindrets/diffview.nvim'
+
 
 call plug#end()
 
@@ -282,10 +279,21 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 " let g:mdip_imgdir = 'img'
 " let g:mdip_imgname = 'image'
 
+" ------------- markdown-preview -----------
+let g:mkdp_theme = 'light'
+
+" ------------- easy-motion ----------------
+" s{char}{char} to move to {cahr}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+vmap s <Plug>(easymotion-overwin-f2)
 
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+set fdm=indent
+set nofoldenable
+" zc zo zC zo zn zN
 
 set noundofile
 set nocompatible
@@ -318,10 +326,19 @@ imap <C-h> <left>
 imap <C-l> <right>
 
 nmap <Space>2 :NERDTreeToggle<CR>
-nmap <Space>s :w<CR>
+nmap <Space>3 :NERDTreeFind<CR>
+nmap <Space>j :w<CR>
 nmap <Space>t :tabnew<CR>
 nmap <Space>q :q<CR>
 nmap <Space>v :vsplit<CR>
+
+nmap <C-u> <C-b>
+nmap <C-d> <C-f>
+vmap <C-u> <C-b>
+vmap <C-d> <C-f>
+
+
+vmap <C-y> "+y
 
 inoremap jk <ESC>
 
@@ -332,3 +349,6 @@ color darcula
 if has('mouse')
 	set mouse-=a
 endif
+
+command RlspTsserver :CocComand tsserver.restart
+
