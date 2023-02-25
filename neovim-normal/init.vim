@@ -19,7 +19,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html
   Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint
   Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
-  Plug 'neoclide/coc-spell-check', {'do': 'npm install --frozen-lockfile'}  " spell check
+  Plug 'iamcco/coc-spell-checker', {'do': 'npm install --frozen-lockfile'}  " spell check
 
 
   Plug 'nvim-lua/plenary.nvim'
