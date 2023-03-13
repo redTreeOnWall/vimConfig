@@ -288,16 +288,21 @@ imap <C-l> <right>
 
 nmap <Space>2 :NERDTreeToggle<CR>
 nmap <Space>3 :NERDTreeFind<CR>
-nmap <Space>j :w<CR>
 nmap <Space>t :tabnew<CR>
 nmap <Space>q :q<CR>
 nmap <Space>v :vsplit<CR>
+
+nmap <Space><Space> :w<CR>
 
 nmap <C-u> <C-b>
 nmap <C-d> <C-f>
 vmap <C-u> <C-b>
 vmap <C-d> <C-f>
 
+nmap <Space>k <C-b>
+nmap <Space>j <C-f>
+vmap <Space>k <C-b>
+vmap <Space>j <C-f>
 
 vmap <C-y> "+y
 
