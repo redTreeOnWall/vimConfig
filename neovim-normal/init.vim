@@ -299,9 +299,9 @@ inoremap jk <ESC>
 " 主题
 color darcula 
 
-"终端鼠标复制粘贴
 if has('mouse')
 	set mouse-=a
 endif
 
 command RlspTsserver :CocComand tsserver.restart
+
