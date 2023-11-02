@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-java', {'do': 'npm install --frozen-lockfile'} " java
   Plug 'clangd/coc-clangd', {'do': 'npm install --frozen-lockfile'} " c/c++
   Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html
+  Plug 'neoclide/coc-css', {'do': 'npm install --frozen-lockfile'} " html
   Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint
   Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
   Plug 'iamcco/coc-spell-checker', {'do': 'npm install --frozen-lockfile'}  " spell check
@@ -304,8 +305,10 @@ nmap <Space>3 :NERDTreeFind<CR>
 nmap <Space>t :tabnew<CR>
 nmap <Space>q :q<CR>
 nmap <Space>v :vsplit<CR>
+nmap <Space>n :nohlsearch<CR>
+nmap <Space>d :put =strftime('# %Y-%m-%d %H:%M:%S')<CR>
 
-nmap <Space><Space> :w<CR>
+nmap <Space>w :w<CR>
 
 nmap <C-u> <C-b>
 nmap <C-d> <C-f>
@@ -329,4 +332,6 @@ if has('mouse')
 endif
 
 command RlspTsserver :CocComand tsserver.restart
+
+nmap <Space>p :CocCommand prettier.formatFile <CR>
 

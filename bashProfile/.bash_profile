@@ -26,5 +26,9 @@ alias ll="ls -lah"
 alias pbcopy="clip.exe"
 alias pbpaste="powershell.exe -command 'Get-Clipboard' | head -n -1"
 
+alias edge="open -a Microsoft\ Edge $1"
+
+alias python="python3"
+
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
