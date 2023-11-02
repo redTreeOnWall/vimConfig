@@ -229,8 +229,19 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 lua <<EOF
 require('telescope').setup{
   defaults = {
-    path_display={'smart'}
-  }
+    path_display={'smart'},
+  },
+  pickers = {
+    find_files = {
+      previewer = false,
+    },
+    oldfiles = {
+      previewer = false,
+    },
+    buffers = {
+      previewer = false,
+    },
+  },
 }
 EOF
 
@@ -277,6 +288,8 @@ set hlsearch
 set number
 set splitbelow
 set splitright
+
+set colorcolumn=80
 
 set nolist
 set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
