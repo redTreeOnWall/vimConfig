@@ -335,3 +335,5 @@ command RlspTsserver :CocComand tsserver.restart
 
 nmap <Space>p :CocCommand prettier.formatFile <CR>
 
+
+hi CocFloating ctermbg=237
