@@ -43,6 +43,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'sindrets/diffview.nvim'
 
+  Plug 'mattn/emmet-vim'
 
 call plug#end()
 
@@ -330,6 +331,8 @@ color darcula
 if has('mouse')
 	set mouse-=a
 endif
+
+set mouse=
 
 command RlspTsserver :CocComand tsserver.restart
 
