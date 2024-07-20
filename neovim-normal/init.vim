@@ -19,7 +19,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-html', {'do': 'npm install --frozen-lockfile'} " html
   Plug 'neoclide/coc-css', {'do': 'npm install --frozen-lockfile'} " html
   Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint
-  Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
+  " Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
   Plug 'iamcco/coc-spell-checker', {'do': 'npm install --frozen-lockfile'}  " spell check
 
 
@@ -336,7 +336,6 @@ set mouse=
 
 command RlspTsserver :CocComand tsserver.restart
 
-nmap <Space>p :CocCommand prettier.formatFile <CR>
+nmap <Space>p :CocCommand eslint.executeAutofix <CR>
 
-
-hi CocFloating ctermbg=237
+hi CocFloating ctermbg=237 guibg=#2b2b2b
