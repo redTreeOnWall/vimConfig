@@ -1,0 +1,36 @@
+# [shell]
+# program = 'Ubuntu'
+# program = 'C:\\cygwin64\\bin\\bash.exe'
+# args = ["--login"]
+
+
+[env]
+TERM = "xterm-256color"
+
+
+[cursor]
+thickness = 0.15
+
+[window]
+padding.x = 0
+padding.y = 0
+
+# startup_mode = "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
+startup_mode = "Maximized" 
+
+# decorations = "none"
+
+opacity = 0.98
+# blur = true
+
+# option_as_alt = "Both"
+
+# dimensions.columns = 130
+# dimensions.lines = 42
+# position.x = 250
+# position.y = 20
+
+[font]
+normal = { family = "Cascadia Code", style = "Regular" }
+size = 16
+offset = {x = 0, y = 8}
