@@ -291,7 +291,7 @@ set number
 set splitbelow
 set splitright
 
-set colorcolumn=80
+" set colorcolumn=80
 
 set nolist
 set listchars=tab:▶\ ,eol:¬,trail:·,extends:>,precedes:<
@@ -310,6 +310,7 @@ nmap <Space>n :nohlsearch<CR>
 nmap <Space>d :put =strftime('# %Y-%m-%d %H:%M:%S')<CR>
 
 nmap <Space>w :w<CR>
+nmap <Space>l :w<CR>
 
 nmap <C-u> <C-b>
 nmap <C-d> <C-f>
@@ -326,7 +327,7 @@ vmap <C-y> "+y
 inoremap jk <ESC>
 
 " 主题
-color darcula 
+color darculaTransparent
 
 if has('mouse')
 	set mouse-=a

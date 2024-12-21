@@ -1,0 +1,21 @@
+{
+    "languageserver": {
+        "csharp-ls": {
+          "command": "csharp-ls",
+          "filetypes": ["cs"],
+          "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+        }
+    },
+    "cSpell.userWords": [
+      "Exacalidraw",
+      "Excalidraw",
+      "Horiz",
+      "Tldraw",
+      "darcula",
+      "hljs",
+      "lirunlong",
+      "protobuf",
+      "tseslint"
+    ],
+    "eslint.experimental.useFlatConfig": true
+}
