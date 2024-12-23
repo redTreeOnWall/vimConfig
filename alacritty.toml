@@ -16,7 +16,7 @@ padding.x = 0
 padding.y = 0
 
 # startup_mode = "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
-startup_mode = "Maximized" 
+# startup_mode = "Maximized" 
 
 # decorations = "none"
 
@@ -25,12 +25,12 @@ opacity = 0.98
 
 # option_as_alt = "Both"
 
-# dimensions.columns = 130
-# dimensions.lines = 42
+dimensions.columns = 130
+dimensions.lines = 35
 # position.x = 250
 # position.y = 20
 
 [font]
-normal = { family = "Cascadia Code", style = "Regular" }
+normal = { family = "Source Code Pro", style = "Regular" }
 size = 16
 offset = {x = 0, y = 8}
