@@ -232,6 +232,12 @@ function TelescopeFindFileGit()
   Telescope find_files prompt_prefix=📚
 endfunction
 
+function TelescopeFindSelected()
+  cd `git rev-parse --show-toplevel`
+  let text = @"
+  execute 'Telescope live_grep prompt_prefix=👀 default_text=' . text 
+endfunction
+
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 nnoremap <c-p> <cmd>Telescope oldfiles<cr>
 nnoremap <leader>ff <cmd>call TelescopeFindFileGit()<cr>
@@ -239,6 +245,9 @@ nnoremap <leader>fg <cmd>Telescope live_grep prompt_prefix=📋<cr>
 nnoremap <leader>ft <cmd>call TelescopeOpenGrepGit()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nmap <Space>f viwy:call TelescopeFindSelected()<cr>
+vmap <Space>f y:call TelescopeFindSelected()<cr>
+
 lua <<EOF
 require('telescope').setup{
   defaults = {
