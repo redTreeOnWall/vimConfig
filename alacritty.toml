@@ -25,12 +25,12 @@ opacity = 0.97
 
 # option_as_alt = "Both"
 
-dimensions.columns = 130
-dimensions.lines = 35
+dimensions.columns = 150
+dimensions.lines = 45
 # position.x = 250
 # position.y = 20
 
 [font]
 normal = { family = "Source Code Pro", style = "Regular" }
 size = 16
-offset = {x = 0, y = 8}
+offset = {x = 0, y = 0}

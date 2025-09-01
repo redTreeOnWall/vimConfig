@@ -20,7 +20,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neoclide/coc-css', {'do': 'npm install --frozen-lockfile'} " html
   Plug 'neoclide/coc-eslint', {'do': 'npm install --frozen-lockfile'} " eslint
   " Plug 'neoclide/coc-prettier', {'do': 'npm install --frozen-lockfile'} " prettier
-  Plug 'iamcco/coc-spell-checker', {'do': 'npm install --frozen-lockfile'}  " spell check
+  " Plug 'iamcco/coc-spell-checker', {'do': 'npm install --frozen-lockfile'}  " spell check
 
 
   Plug 'nvim-lua/plenary.nvim'
@@ -222,10 +222,21 @@ let g:coc_preferences_semanticTokensHighlights = 1
 
 " ------------ telescope start ----------
 " Find files using Telescope command-line sugar.
+function TelescopeOpenGrepGit()
+  cd `git rev-parse --show-toplevel`
+  Telescope live_grep prompt_prefix=🔍
+endfunction
+
+function TelescopeFindFileGit()
+  cd `git rev-parse --show-toplevel`
+  Telescope find_files prompt_prefix=📚
+endfunction
+
 nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
 nnoremap <c-p> <cmd>Telescope oldfiles<cr>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>ff <cmd>call TelescopeFindFileGit()<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep prompt_prefix=📋<cr>
+nnoremap <leader>ft <cmd>call TelescopeOpenGrepGit()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 lua <<EOF
