@@ -16,7 +16,7 @@ padding.x = 0
 padding.y = 0
 
 # startup_mode = "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen"
-# startup_mode = "Maximized" 
+# startup_mode = "Maximized"
 
 # decorations = "none"
 
@@ -32,5 +32,11 @@ dimensions.lines = 45
 
 [font]
 normal = { family = "Source Code Pro", style = "Regular" }
+
+# for 150%
 size = 16
+
+# for 200%
+# size = 12
+
 offset = {x = 0, y = 0}

@@ -9,15 +9,25 @@
     "cSpell.userWords": [
       "Exacalidraw",
       "Excalidraw",
+      "GLTF",
       "Horiz",
+      "Raycast",
+      "Rigibody",
+      "SSAO",
+      "Swipeable",
       "Tldraw",
       "darcula",
       "hljs",
       "lirunlong",
+      "localstorage",
       "mariadb",
       "memorains",
+      "metalness",
+      "mixamo",
       "protobuf",
-      "tseslint"
+      "threejs",
+      "tseslint",
+      "wechat"
     ],
     "eslint.experimental.useFlatConfig": true
 }

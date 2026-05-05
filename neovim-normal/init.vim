@@ -285,6 +285,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+autocmd FileType cs setlocal shiftwidth=4 softtabstop=4 tabstop=4
+
 set fdm=indent
 set nofoldenable
 " zc zo zC zo zn zN
@@ -328,6 +330,7 @@ nmap <Space>q :q<CR>
 nmap <Space>v :vsplit<CR>
 nmap <Space>n :nohlsearch<CR>
 nmap <Space>d :put =strftime('# %Y-%m-%d %H:%M:%S')<CR>
+nmap <Space>g oconsole.log("")<ESC>hi
 
 nmap <Space>w :w<CR>
 nmap <Space>l :w<CR>
@@ -357,6 +360,9 @@ set mouse=
 
 command RlspTsserver :CocComand tsserver.restart
 
-nmap <Space>p :CocCommand eslint.executeAutofix <CR>
+" nmap <Space>p :CocCommand eslint.executeAutofix<CR>
+
+nmap <Space>p :CocCommand editor.action.formatDocument<CR>
 
 hi CocFloating ctermbg=237 guibg=#2b2b2b
+
