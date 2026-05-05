@@ -10,8 +10,8 @@ import * as pathModule from "node:path";
 
 // Configuration options
 interface Config {
-	// Confirm level: "all" = all operations, "dangerous" = dangerous only, "none" = no confirmation
-	confirmLevel: "all" | "dangerous" | "none";
+	// Confirm level: "all" = all operations, "smart" = write only, "dangerous" = dangerous only, "none" = no confirmation
+	confirmLevel: "all" | "smart" | "dangerous" | "none";
 	// Dangerous command patterns (bash)
 	dangerousPatterns: RegExp[];
 	// Dangerous file path patterns (write/edit)
@@ -21,7 +21,7 @@ interface Config {
 }
 
 const defaultConfig: Config = {
-	confirmLevel: "all", // Default: confirm all operations
+	confirmLevel: "smart", // Default: only confirm write operations
 	dangerousPatterns: [
 		/\brm\s+(-rf?|--recursive)/i, // rm -rf
 		/\bsudo\b/i, // sudo
@@ -62,6 +62,7 @@ interface RememberedChoice {
 export default function (pi: ExtensionAPI) {
 	// Restore config from session
 	let config: Config = { ...defaultConfig };
+	let isEnabled = true; // Gate enabled by default
 	const rememberedChoices = new Map<string, RememberedChoice>();
 
 	// Restore config and remembered choices on session start
@@ -86,13 +87,13 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Register command to toggle confirm level
-	pi.registerCommand("permissions", {
-		description: "Toggle permission level: /permissions [all|dangerous|none]",
+	pi.registerCommand("guard", {
+		description: "Toggle guard level: /guard [all|smart|dangerous|none]",
 		handler: async (args, ctx) => {
-			const level = (args?.trim() as Config["confirmLevel"]) || "all";
+			const level = (args?.trim() as Config["confirmLevel"]) || "smart";
 
-			if (!["all", "dangerous", "none"].includes(level)) {
-				ctx.ui.notify("Invalid option. Usage: /permissions all|dangerous|none", "error");
+			if (!["all", "smart", "dangerous", "none"].includes(level)) {
+				ctx.ui.notify("Invalid option. Usage: /guard all|smart|dangerous|none", "error");
 				return;
 			}
 
@@ -101,12 +102,35 @@ export default function (pi: ExtensionAPI) {
 			// Save config to session
 			pi.appendEntry("permission-gate-config", { confirmLevel: level });
 
-			ctx.ui.notify(`Permission level changed to: ${level}`, "success");
+			ctx.ui.notify(`Guard level changed to: ${level}`, "success");
+		},
+	});
+
+	// Register command to toggle gate on/off
+	pi.registerCommand("gate", {
+		description: "Toggle permission gate: /gate [on|off|status]",
+		handler: async (args, ctx) => {
+			const subcmd = args?.trim().toLowerCase() || "status";
+
+			if (subcmd === "off" || subcmd === "disable") {
+				isEnabled = false;
+				ctx.ui.notify("Permission gate: DISABLED (all tools allowed)", "warning");
+			} else if (subcmd === "on" || subcmd === "enable") {
+				isEnabled = true;
+				ctx.ui.notify("Permission gate: ENABLED", "success");
+			} else {
+				ctx.ui.notify(`Permission gate: ${isEnabled ? "ENABLED" : "DISABLED"}`, "info");
+			}
 		},
 	});
 
 	// Intercept tool calls
 	pi.on("tool_call", async (event: ToolCallEvent, ctx: ExtensionContext) => {
+		// Skip if gate is disabled
+		if (!isEnabled) {
+			return undefined;
+		}
+
 		// If set to no confirmation, allow directly
 		if (config.confirmLevel === "none") {
 			return undefined;
@@ -144,12 +168,6 @@ export default function (pi: ExtensionAPI) {
 	): Promise<{ block: true; reason: string } | undefined> {
 		const command = (event.input.command as string) || "";
 
-		// Check if in whitelist
-		const isWhitelisted = config.whitelist.some((w) => command.trim().startsWith(w));
-		if (isWhitelisted && config.confirmLevel !== "all") {
-			return undefined;
-		}
-
 		// Check if dangerous command
 		const isDangerous = config.dangerousPatterns.some((p) => p.test(command));
 
@@ -158,8 +176,19 @@ export default function (pi: ExtensionAPI) {
 			return undefined;
 		}
 
-		// Get command type (first word) for category-based remembering
+		// In smart mode, allow read-only commands
+		const readOnlyCommands = ["ls", "cat", "head", "tail", "grep", "find", "pwd", "echo", "which", "type", "file", "stat", "du", "df", "ps", "top", "htop", "whoami", "uname", "date", "cal"];
 		const commandType = command.trim().split(/\s+/)[0];
+		const isReadOnly = readOnlyCommands.includes(commandType);
+		if (config.confirmLevel === "smart" && isReadOnly && !isDangerous) {
+			return undefined;
+		}
+
+		// Check whitelist (legacy behavior for non-smart modes)
+		const isWhitelisted = config.whitelist.some((w) => command.trim().startsWith(w));
+		if (isWhitelisted && config.confirmLevel !== "all") {
+			return undefined;
+		}
 
 		// Check remembered choice (exact match first, then category)
 		const exactKey = `bash:${command}`;
