@@ -248,9 +248,16 @@ export default function (pi: ExtensionAPI) {
 		// Get directory for category-based remembering
 		const dir = pathModule.dirname(path);
 
+		// Determine if the file is within the working directory
+		const resolvedPath = pathModule.resolve(path);
+		const cwd = process.cwd();
+		const isInWorkDir = resolvedPath.startsWith(cwd + pathModule.sep) || resolvedPath === cwd;
+		const effectiveDir = isInWorkDir ? cwd : dir;
+		const dirLabel = isInWorkDir ? "working directory" : `"${dir}/"`;
+
 		// Check remembered choice (exact match first, then directory)
 		const exactKey = `write:${path}`;
-		const dirKey = `write-dir:${dir}/`;
+		const dirKey = `write-dir:${effectiveDir}/`;
 		const remembered = getRememberedChoice(exactKey) || getRememberedChoice(dirKey);
 		if (remembered) {
 			if (remembered === "allow") return undefined;
@@ -263,7 +270,7 @@ export default function (pi: ExtensionAPI) {
 		const options = [
 			"✓ Allow once",
 			"✓ Allow & Remember this exact file",
-			`✓ Allow & Remember all files in "${dir}/"`,
+			`✓ Allow & Remember all files in ${dirLabel}`,
 			"✗ Block",
 		];
 		const choice = await ctx.ui.select(
@@ -277,7 +284,7 @@ export default function (pi: ExtensionAPI) {
 			case "✓ Allow & Remember this exact file":
 				rememberChoice(exactKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
-			case `✓ Allow & Remember all files in "${dir}/"`:
+			case `✓ Allow & Remember all files in ${dirLabel}`:
 				rememberChoice(dirKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
 			case "✗ Block":
@@ -308,9 +315,16 @@ export default function (pi: ExtensionAPI) {
 		// Get directory for category-based remembering
 		const dir = pathModule.dirname(path);
 
+		// Determine if the file is within the working directory
+		const resolvedPath = pathModule.resolve(path);
+		const cwd = process.cwd();
+		const isInWorkDir = resolvedPath.startsWith(cwd + pathModule.sep) || resolvedPath === cwd;
+		const effectiveDir = isInWorkDir ? cwd : dir;
+		const dirLabel = isInWorkDir ? "working directory" : `"${dir}/"`;
+
 		// Check remembered choice (exact match first, then directory)
 		const exactKey = `edit:${path}`;
-		const dirKey = `edit-dir:${dir}/`;
+		const dirKey = `edit-dir:${effectiveDir}/`;
 		const remembered = getRememberedChoice(exactKey) || getRememberedChoice(dirKey);
 		if (remembered) {
 			if (remembered === "allow") return undefined;
@@ -323,7 +337,7 @@ export default function (pi: ExtensionAPI) {
 		const options = [
 			"✓ Allow once",
 			"✓ Allow & Remember this exact file",
-			`✓ Allow & Remember all files in "${dir}/"`,
+			`✓ Allow & Remember all files in ${dirLabel}`,
 			"✗ Block",
 		];
 		const choice = await ctx.ui.select(
@@ -337,7 +351,7 @@ export default function (pi: ExtensionAPI) {
 			case "✓ Allow & Remember this exact file":
 				rememberChoice(exactKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
-			case `✓ Allow & Remember all files in "${dir}/"`:
+			case `✓ Allow & Remember all files in ${dirLabel}`:
 				rememberChoice(dirKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
 			case "✗ Block":
@@ -366,9 +380,16 @@ export default function (pi: ExtensionAPI) {
 		// Get directory for category-based remembering
 		const dir = pathModule.dirname(path);
 
+		// Determine if the file is within the working directory
+		const resolvedPath = pathModule.resolve(path);
+		const cwd = process.cwd();
+		const isInWorkDir = resolvedPath.startsWith(cwd + pathModule.sep) || resolvedPath === cwd;
+		const effectiveDir = isInWorkDir ? cwd : dir;
+		const dirLabel = isInWorkDir ? "working directory" : `"${dir}/"`;
+
 		// Check remembered choice (exact match first, then directory)
 		const exactKey = `read:${path}`;
-		const dirKey = `read-dir:${dir}/`;
+		const dirKey = `read-dir:${effectiveDir}/`;
 		const remembered = getRememberedChoice(exactKey) || getRememberedChoice(dirKey);
 		if (remembered) {
 			if (remembered === "allow") return undefined;
@@ -381,7 +402,7 @@ export default function (pi: ExtensionAPI) {
 		const options = [
 			"✓ Allow once",
 			"✓ Allow & Remember this exact file",
-			`✓ Allow & Remember all files in "${dir}/"`,
+			`✓ Allow & Remember all files in ${dirLabel}`,
 			"✗ Block",
 		];
 		const choice = await ctx.ui.select(
@@ -395,7 +416,7 @@ export default function (pi: ExtensionAPI) {
 			case "✓ Allow & Remember this exact file":
 				rememberChoice(exactKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
-			case `✓ Allow & Remember all files in "${dir}/"`:
+			case `✓ Allow & Remember all files in ${dirLabel}`:
 				rememberChoice(dirKey, "allow", Number.MAX_SAFE_INTEGER);
 				return undefined;
 			case "✗ Block":
